@@ -1,14 +1,19 @@
 from Tkinter import *
 
-canvas_width = 500
-canvas_height =500
+canvas_width = 800
+canvas_height =800
 
 master = Tk()
 
 canvas = Canvas(master, width=canvas_width, height=canvas_height)
 canvas.pack()
 
-canvas.create_line((210,200),(250,400),(280,200), smooth=True)
+circle = canvas.create_oval((80,91),(116,115))
+
+line =canvas.create_line((98,102),(118,132))
+for x in range (0, 600):
+    canvas.move(line,1, 1)
+    master.update()
 
 def callback(event):
     print(event.x, event.y)
