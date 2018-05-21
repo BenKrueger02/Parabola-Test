@@ -1,4 +1,6 @@
 from Tkinter import *
+import random
+
 
 canvas_width = 800
 canvas_height =800
@@ -7,6 +9,13 @@ master = Tk()
 
 canvas = Canvas(master, width=canvas_width, height=canvas_height,bg = '#16316E')
 canvas.pack()
+
+for c in range(0, 100):
+    x = random.randint(1, 801)
+    y = random.randint(1, 801)
+
+    canvas.create_oval((x,y),(x-6,y-6), fill = "white", outline = "White")
+
 
 ##Creates the Satelite
 def create_satelite():
