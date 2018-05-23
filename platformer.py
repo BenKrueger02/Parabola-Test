@@ -1,4 +1,6 @@
+
 from Tkinter import *
+
 
 canvas_width = 800
 canvas_height =800
@@ -18,20 +20,25 @@ circle = canvas.create_oval((80,91),(116,115))
 def callback(event):
     print(event.x, event.y)
 
-
-
 def radio_wave():
     x = 100
     y = 100
-    t = 120
-    canvas.create_line((x, 100), (x+10, t), (x + 20, 100), smooth=True)
+    t = 90
+    r = 130
+
+    canvas.create_line((x, y), (r, t), (x + 20, y + 20), smooth=True, width = 3, fill='green')
     for k in range(0,100):
         x = x + 20
-        t = t - 40
-        canvas.create_line((x, 100), (x+10, t), (x + 20, 100), smooth=True)
+        y = y + 20
+        r = r - 20
+        t = t + 60
+        canvas.create_line((x, y), (r, t), (x + 20, y + 20), smooth=True, width = 3, fill='green')
         x = x + 20
-        t = t + 40
-        canvas.create_line((x, 100), (x+10, t), (x + 20, 100), smooth=True)
+        y = y + 20
+        r = r + 60
+        t = t - 20
+        canvas.create_line((x, y), (r, t), (x + 20, y + 20), smooth=True, width = 3, fill='green')
+
 
 canvas.bind("<Button-1>", callback)
 
