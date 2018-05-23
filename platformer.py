@@ -10,12 +10,19 @@ master = Tk()
 canvas = Canvas(master, width=canvas_width, height=canvas_height,bg = '#16316E')
 canvas.pack()
 
-for c in range(0, 100):
+##Creates upper half of stars
+for c in range(0, 66):
     x = random.randint(1, 801)
-    y = random.randint(1, 801)
+    y = random.randint(1, 425)
 
     canvas.create_oval((x,y),(x-6,y-6), fill = "white", outline = "White")
 
+##creates lower left half of stars
+for k in range(0, 33):
+    x = random.randint(1, 425)
+    y = random.randint(425, 801)
+
+    canvas.create_oval((x,y),(x-6,y-6), fill = "white", outline = "White")
 
 ##Creates the Satelite
 def create_satelite():
