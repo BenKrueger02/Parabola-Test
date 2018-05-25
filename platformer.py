@@ -11,54 +11,60 @@ canvas = Canvas(master, width=canvas_width, height=canvas_height,bg = '#16316E')
 canvas.pack()
 
 ##Creates upper half of stars
-for c in range(0, 66):
+for c in range(0, 80):
     x = random.randint(1, 801)
-    y = random.randint(1, 425)
-
+    y = random.randint(1, 580)
     canvas.create_oval((x,y),(x-6,y-6), fill = "white", outline = "White")
 
 ##creates lower left half of stars
-for k in range(0, 33):
-    x = random.randint(1, 425)
-    y = random.randint(425, 801)
-
+for k in range(0, 10):
+    x = random.randint(1, 190)
+    y = random.randint(580, 801)
     canvas.create_oval((x,y),(x-6,y-6), fill = "white", outline = "White")
+
+##creates lower right half of stars
+for q in range(0, 10):
+    x = random.randint(605, 801)
+    y = random.randint(580, 801)
+    canvas.create_oval((x,y),(x-6,y-6), fill = "white", outline = "White")
+
 
 ##Creates the Satelite
 def create_satelite():
     ##Left Solar panel
     y= 88
-    x=40
+    x=316
     ##Lines on Solar Panel
-    canvas.create_rectangle((24,88),(104,152), fill="#4863A0", width = 3)
+    canvas.create_rectangle((300,88),(380,152), fill="#4863A0", width = 3)
     for j in range(0,5):
         canvas.create_line((x,88),(x,152))
         x = x+16
 
     for i in range(0,4):
-        canvas.create_line((24, y), (104, y))
+        canvas.create_line((300, y), (380, y))
         y = y + 16
 
     ##Body of Satelite
-    canvas.create_rectangle((104, 96), (160, 144), fill="Gray", width=3)
+    canvas.create_rectangle((380, 96), (436, 144), fill="Gray", width=3)
 
     ##Right solar Panel
     y = 88
-    x = 160
-    canvas.create_rectangle((160, 88), (240, 152), fill="#4863A0", width=3)
+    x = 452
+    canvas.create_rectangle((436, 88), (516, 152), fill="#4863A0", width=3)
     ##Lines on Solar Panel
     for b in range(0, 5):
         canvas.create_line((x, 88), (x, 152))
         x = x + 16
 
     for a in range(0, 4):
-        canvas.create_line((160, y), (240, y))
+        canvas.create_line((436, y), (516, y))
         y = y + 16
 
     ##Lower Part (Satelite Dish)
-    canvas.create_line((132,144),(132,188),width=3)
-    canvas.create_line((121.6,229.6),(113.6,173.6), (177.6,173.6),width=3,smooth=True)
-    canvas.create_line((132,188),(153.6,205.6), width=3)
+    canvas.create_line((408,144),(408,188),width=3)
+
+    canvas.create_line((397.6,229.6),(389.6,173.6), (453.6,173.6),width=3,smooth=True)
+    canvas.create_line((410,190),(153.6,205.6), width=3)
     canvas.create_oval((149.6,201.6),(157.6,209.6), fill="Black")
 
 ##Makes the Satelite Dish
