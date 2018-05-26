@@ -1,5 +1,6 @@
 from Tkinter import *
 import random
+import time
 
 
 canvas_width = 800
@@ -30,42 +31,41 @@ for q in range(0, 10):
 
 
 ##Creates the Satelite
-def create_satelite():
+def create_satelite(w):
     ##Left Solar panel
     y= 88
-    x=176
+    x=176+w
     ##Lines on Solar Panel
-    canvas.create_rectangle((160,88),(240,152), fill="#4863A0", width = 3)
+    canvas.create_rectangle((160+w,88),(240+w,152), fill="#4863A0", width = 3)
     for j in range(0,5):
         canvas.create_line((x,88),(x,152))
         x = x+16
 
     for i in range(0,4):
-        canvas.create_line((160, y), (240, y))
+        canvas.create_line((160+w, y), (240+w, y))
         y = y + 16
 
     ##Body of Satelite
-    canvas.create_rectangle((240, 96), (296, 144), fill="Gray", width=3)
+    canvas.create_rectangle((240+w, 96), (296+w, 144), fill="Gray", width=3)
 
     ##Right solar Panel
     y = 88
-    x = 312
-    canvas.create_rectangle((296, 88), (376, 152), fill="#4863A0", width=3)
+    x = 312+w
+    canvas.create_rectangle((296+w, 88), (376+w, 152), fill="#4863A0", width=3)
     ##Lines on Solar Panel
     for b in range(0, 5):
         canvas.create_line((x, 88), (x, 152))
         x = x + 16
 
     for a in range(0, 4):
-        canvas.create_line((296, y), (376, y))
+        canvas.create_line((296+w, y), (376+w, y))
         y = y + 16
 
     ##Lower Part (Satelite Dish)
-    canvas.create_line((268,144),(268,182),width=3)
-    canvas.create_line((218,200),(268,160), (318,200),width=3,smooth=True)
-    canvas.create_line((268,182),(268,203), width=3)
-
-    canvas.create_oval((264,199),(272,207), fill="Black")
+    canvas.create_line((268+w,144),(268+w,182),width=3)
+    canvas.create_line((218+w,200),(268+w,160), (318+w,200),width=3,smooth=True)
+    canvas.create_line((268+w,182),(268+w,218), width=3)
+    canvas.create_oval((264+w,214),(272+w,222), fill="Black")
 
 ##Makes the Satelite Dish
 def create_satelite_dish(width):
@@ -85,30 +85,46 @@ def create_satelite_dish(width):
 def callback(event):
     print(event.x, event.y)
 
-# def radio_wave():
-#     x = 155
-#     y = 210
-#     t = 200
-#     r = 185
-#
-#     canvas.create_line((x, y), (r, t), (x + 20, y + 20), smooth=True, width = 3, fill='green')
-#     for k in range(0,12):
-#         x = x + 20
-#         y = y + 20
-#         r = r - 20
-#         t = t + 60
-#         canvas.create_line((x, y), (r, t), (x + 20, y + 20), smooth=True, width = 3, fill='green')
-#         x = x + 20
-#         y = y + 20
-#         r = r + 60
-#         t = t - 20
-#         canvas.create_line((x, y), (r, t), (x + 20, y + 20), smooth=True, width = 3, fill='green')
+def radio_wave():
+    x = 268
+    y = 218
+    t = 225.5
+    r = 288
+
+    canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width = 3, fill='green')
+    for k in range(0,15):
+        y = y + 15
+        r = r - 40
+        t = t + 15
+        canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width = 3, fill='green')
+        y = y + 15
+        r = r + 40
+        t = t + 15
+        canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width = 3, fill='green')
+
+def radio_wave2():
+    x = 268
+    y = 686
+    r = 275.5
+    t = 666
+
+    canvas.create_line((x, y), (r, t), (x + 15, y), smooth=True, width = 3, fill='green')
+    for k in range(0,4):
+        x = x + 15
+        r = r + 15
+        t = t + 40
+        canvas.create_line((x, y), (r, t), (x + 15, y), smooth=True, width = 3, fill='green')
+        x = x + 15
+        r = r + 15
+        t = t - 40
+        canvas.create_line((x, y), (r, t), (x + 15, y), smooth=True, width = 3, fill='green')
 
 
 
 canvas.bind("<Button-1>", callback)
 
 create_satelite_dish("wide")
-create_satelite()
-#radio_wave()
+create_satelite(0)
+radio_wave()
+radio_wave2()
 mainloop()
