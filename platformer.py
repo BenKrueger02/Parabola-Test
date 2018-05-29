@@ -31,13 +31,13 @@ def create_stars():
         canvas.create_oval((x,y),(x-6,y-6), fill = "white", outline = "White")
 
 def create_buttons():
-    canvas.create_rectangle((72,279),(125,342),fill = 'red')
-    ninety = Label(text = "90", font=('Bodoni',45),bg="#4863A0")
+    canvas.create_rectangle((72,279),(125,342),fill = '#00C5FF')
+    ninety = Label(text = "90", font=('Bodoni',45),bg="#2874A6")
     ninety.pack()
     ninety.place(x=10,y=280)
 
-    canvas.create_rectangle((72, 379), (125, 442), fill='red')
-    forty_five = Label(text="45", font=('Bodoni', 45), bg="#4863A0")
+    canvas.create_rectangle((72, 379), (125, 442), fill='#00C5FF')
+    forty_five = Label(text="45", font=('Bodoni', 45), bg="#2874A6")
     forty_five.pack()
     forty_five.place(x=11, y=380)
 
