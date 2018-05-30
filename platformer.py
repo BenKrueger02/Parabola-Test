@@ -146,21 +146,24 @@ def radio_wave(counter):
             canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width=3, fill='green')
 
     if counter == 2:
-        x = 400
+        x = 468
         y = 218
         t = 225.5
-        r = 420
+        r = 488
 
         canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width=3, fill='green')
-        for k in range(0, 15):
+        for k in range(0, 17):
             y = y + 15
             r = r - 40
             t = t + 15
             canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width=3, fill='green')
-            y = y + 15
-            r = r + 40
-            t = t + 15
-            canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width=3, fill='green')
+            if k==16:
+                print("Hi")
+            else:
+                y = y + 15
+                r = r + 40
+                t = t + 15
+                canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width=3, fill='green')
 
 
 canvas.bind("<Button-1>", callback)
