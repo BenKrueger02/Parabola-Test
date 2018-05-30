@@ -1,6 +1,6 @@
 from Tkinter import *
 import random
-import time
+
 
 
 canvas_width = 800
@@ -25,21 +25,16 @@ def create_stars():
         canvas.create_oval((x,y),(x-6,y-6), fill = "white", outline = "White")
 
     ##creates lower right half of stars
-    for q in range(0, 10):
-        x = random.randint(605, 801)
-        y = random.randint(580, 801)
-        canvas.create_oval((x,y),(x-6,y-6), fill = "white", outline = "White")
+##    for q in range(0, 10):
+##        x = random.randint(605, 801)
+##        y = random.randint(580, 801)
+##        canvas.create_oval((x,y),(x-6,y-6), fill = "white", outline = "White")
 
 def create_buttons():
-    canvas.create_rectangle((72,279),(125,342),fill = '#00C5FF')
-    ninety = Label(text = "90", font=('Bodoni',45),bg="#2874A6")
+    canvas.create_rectangle((630,670),(690,731),fill = '#00C5FF',outline='#16316E')
+    ninety = Label(text = "Next", font=('Bodoni',45),bg="#2874A6", borderwidth=1)
     ninety.pack()
-    ninety.place(x=10,y=280)
-
-    canvas.create_rectangle((72, 379), (125, 442), fill='#00C5FF')
-    forty_five = Label(text="45", font=('Bodoni', 45), bg="#2874A6")
-    forty_five.pack()
-    forty_five.place(x=11, y=380)
+    ninety.place(x=690,y=671)
 
 
 ##Creates the Satelite
@@ -81,22 +76,30 @@ def create_satelite(w):
     canvas.create_oval((264+w,214),(272+w,222), fill="Black")
 
 ##Makes the Satelite Dish
-def create_satelite_dish(width):
-    if width == "narrow":
-        canvas.create_line((266,500),(960,960),(680,480), smooth=True, width=5,fill = 'gray')
-        canvas.create_line((561.6,561.6),(770.4,770.4),width=5,fill='gray')
-        canvas.create_oval((580, 580),(540, 540),width=5,fill='gray', outline="Gray")
-    if width == "wide":
-        canvas.create_line((199, 600), (400, 900), (601, 600), smooth=True, width=5, fill='gray')
-        canvas.create_line((400, 750), (400, 682.66), width=5, fill='gray')
-        canvas.create_oval((380, 662.66), (420, 702.66), width=5, fill='gray', outline="Gray")
-    if width == "straight":
-        canvas.create_line((336, 760),(760, 336), width=5, fill='gray')
-        canvas.create_line((460, 460), (548, 548), width=5, fill='gray')
-        canvas.create_oval((480, 480), (440, 440), width=5, fill='gray', outline="Gray")
+def create_satelite_dish():
+    canvas.create_line((199, 600), (400, 900), (601, 600), smooth=True, width=5, fill='gray')
+    canvas.create_line((400, 750), (400, 682.66), width=5, fill='gray')
+    canvas.create_oval((380, 662.66), (420, 702.66), width=5, fill='gray', outline="Gray")
+
 
 def callback(event):
+    global counter
     print(event.x, event.y)
+    if (event.x < 690 and event.x > 630) and (event.y < 730 and event.y > 670):
+        counter += 1
+        if counter >= 3:
+            counter = 0
+        if counter == 0:
+            print('Hello_0')
+            create_satelite(0)
+        if counter == 1:
+            print('Hello_1')
+            create_satelite(132)
+        if counter == 2:
+            print('Hello_2')
+
+
+
 
 def radio_wave():
     x = 268
@@ -134,11 +137,14 @@ def radio_wave2():
 
 
 
+
+global counter
+counter=3
 canvas.bind("<Button-1>", callback)
 create_buttons()
-create_satelite_dish("wide")
-create_satelite(0)
 create_stars()
+create_satelite_dish()
+
 radio_wave()
 radio_wave2()
 mainloop()
