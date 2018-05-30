@@ -24,11 +24,6 @@ def create_stars():
         y = random.randint(580, 801)
         canvas.create_oval((x,y),(x-6,y-6), fill = "white", outline = "White")
 
-    ##creates lower right half of stars
-##    for q in range(0, 10):
-##        x = random.randint(605, 801)
-##        y = random.randint(580, 801)
-##        canvas.create_oval((x,y),(x-6,y-6), fill = "white", outline = "White")
 
 def create_buttons():
     canvas.create_rectangle((630,670),(690,731),fill = '#00C5FF',outline='#16316E')
@@ -90,61 +85,96 @@ def callback(event):
         if counter >= 3:
             counter = 0
         if counter == 0:
-            print('Hello_0')
-            create_satelite(0)
+            move_satilite(0)
         if counter == 1:
             print('Hello_1')
-            create_satelite(132)
+            move_satilite(132)
         if counter == 2:
             print('Hello_2')
+            move_satilite(200)
 
 
+def radio_wave(counter):
+    if counter == 0:
+        x = 268
+        y = 218
+        t = 225.5
+        r = 288
 
-
-def radio_wave():
-    x = 268
-    y = 218
-    t = 225.5
-    r = 288
-
-    canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width = 3, fill='green')
-    for k in range(0,15):
-        y = y + 15
-        r = r - 40
-        t = t + 15
         canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width = 3, fill='green')
-        y = y + 15
-        r = r + 40
-        t = t + 15
-        canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width = 3, fill='green')
+        for k in range(0,15):
+            y = y + 15
+            r = r - 40
+            t = t + 15
+            canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width = 3, fill='green')
+            y = y + 15
+            r = r + 40
+            t = t + 15
+            canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width = 3, fill='green')
 
-def radio_wave2():
-    x = 268
-    y = 686
-    r = 275.5
-    t = 666
+        x = 268
+        y = 686
+        r = 275.5
+        t = 666
 
-    canvas.create_line((x, y), (r, t), (x + 15, y), smooth=True, width = 3, fill='green')
-    for k in range(0,4):
-        x = x + 15
-        r = r + 15
-        t = t + 40
         canvas.create_line((x, y), (r, t), (x + 15, y), smooth=True, width = 3, fill='green')
-        x = x + 15
-        r = r + 15
-        t = t - 40
-        canvas.create_line((x, y), (r, t), (x + 15, y), smooth=True, width = 3, fill='green')
+        for k in range(0,4):
+            x = x + 15
+            r = r + 15
+            t = t + 40
+            canvas.create_line((x, y), (r, t), (x + 15, y), smooth=True, width = 3, fill='green')
+            x = x + 15
+            r = r + 15
+            t = t - 40
+            canvas.create_line((x, y), (r, t), (x + 15, y), smooth=True, width = 3, fill='green')
+
+    if counter == 1:
+        x = 400
+        y = 218
+        t = 225.5
+        r = 420
+
+        canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width=3, fill='green')
+        for k in range(0, 15):
+            y = y + 15
+            r = r - 40
+            t = t + 15
+            canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width=3, fill='green')
+            y = y + 15
+            r = r + 40
+            t = t + 15
+            canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width=3, fill='green')
+
+    if counter == 2:
+        x = 400
+        y = 218
+        t = 225.5
+        r = 420
+
+        canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width=3, fill='green')
+        for k in range(0, 15):
+            y = y + 15
+            r = r - 40
+            t = t + 15
+            canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width=3, fill='green')
+            y = y + 15
+            r = r + 40
+            t = t + 15
+            canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width=3, fill='green')
 
 
-
-
-global counter
-counter=3
 canvas.bind("<Button-1>", callback)
-create_buttons()
-create_stars()
-create_satelite_dish()
+global counter
+counter=0
 
-radio_wave()
-radio_wave2()
+def move_satilite(x_pos):
+    canvas.create_rectangle((0, 0), (800, 800), fill='#16316E')
+    create_stars()
+    create_satelite(x_pos)
+    create_buttons()
+    create_satelite_dish()
+    radio_wave(counter)
+
+
+move_satilite(0)
 mainloop()
