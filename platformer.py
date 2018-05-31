@@ -91,7 +91,7 @@ def callback(event):
             move_satilite(132)
         if counter == 2:
             print('Hello_2')
-            move_satilite(200)
+            move_satilite(180)
 
 
 def radio_wave(counter):
@@ -146,10 +146,10 @@ def radio_wave(counter):
             canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width=3, fill='green')
 
     if counter == 2:
-        x = 468
+        x = 448
         y = 218
         t = 225.5
-        r = 488
+        r = 468
 
         canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width=3, fill='green')
         for k in range(0, 17):
@@ -157,13 +157,31 @@ def radio_wave(counter):
             r = r - 40
             t = t + 15
             canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width=3, fill='green')
-            if k==16:
+            if k==17:
                 print("Hi")
             else:
                 y = y + 15
                 r = r + 40
                 t = t + 15
                 canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width=3, fill='green')
+
+        x = 448
+        y = 730
+        t = 707.5
+        r = 455.5
+
+        canvas.create_line((x, y), (r, t), (x - 15, y - 15), smooth=True, width=3, fill='green')
+        for k in range(0, 1):
+            x = x - 15
+            y = y - 15
+            r = r - 45
+            t = t + 15
+            canvas.create_line((x, y), (r, t), (x - 15, y - 15), smooth=True, width=3, fill='green')
+            x = x - 15
+            y = y - 15
+            r = r + 15
+            t = t - 45
+            canvas.create_line((x, y), (r, t), (x - 15, y - 15), smooth=True, width=3, fill='green')
 
 
 canvas.bind("<Button-1>", callback)
