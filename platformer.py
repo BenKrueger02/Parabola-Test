@@ -33,7 +33,7 @@ def create_buttons():
 
 
 ##Creates the Satelite
-def create_satelite(w):
+def create_satelite(w,z):
     ##Left Solar panel
     ##For the 90 degree position, use w=0
     y= 88
@@ -67,8 +67,8 @@ def create_satelite(w):
     ##Lower Part (Satelite Dish)
     canvas.create_line((268+w,144),(268+w,182),width=3)
     canvas.create_line((218+w,200),(268+w,160), (318+w,200),width=3,smooth=True)
-    canvas.create_line((268+w,182),(268+w,218), width=3)
-    canvas.create_oval((264+w,214),(272+w,222), fill="Black")
+    canvas.create_line((268+w,182),(268+w,218-z), width=3)
+    canvas.create_oval((264+w,214-z),(272+w,222-z), fill="Black")
 
 ##Makes the Satelite Dish
 def create_satelite_dish():
@@ -85,13 +85,13 @@ def callback(event):
         if counter >= 3:
             counter = 0
         if counter == 0:
-            move_satilite(0)
+            move_satilite(0,0)
         if counter == 1:
             print('Hello_1')
-            move_satilite(132)
+            move_satilite(132,0)
         if counter == 2:
             print('Hello_2')
-            move_satilite(180)
+            move_satilite(192,5)
 
 
 def radio_wave(counter):
@@ -146,10 +146,10 @@ def radio_wave(counter):
             canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width=3, fill='green')
 
     if counter == 2:
-        x = 448
-        y = 218
-        t = 225.5
-        r = 468
+        x = 460
+        y = 213
+        t = 220.5
+        r = 480
 
         canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width=3, fill='green')
         for k in range(0, 17):
@@ -165,37 +165,40 @@ def radio_wave(counter):
                 t = t + 15
                 canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width=3, fill='green')
 
-        x = 448
-        y = 730
-        t = 707.5
-        r = 455.5
+        x = 460
+        y = 738
+        t = 745.5
+        r = 437.5
 
         canvas.create_line((x, y), (r, t), (x - 15, y - 15), smooth=True, width=3, fill='green')
-        for k in range(0, 1):
-            x = x - 15
-            y = y - 15
-            r = r - 45
-            t = t + 15
-            canvas.create_line((x, y), (r, t), (x - 15, y - 15), smooth=True, width=3, fill='green')
+        for k in range(0, 2):
             x = x - 15
             y = y - 15
             r = r + 15
             t = t - 45
             canvas.create_line((x, y), (r, t), (x - 15, y - 15), smooth=True, width=3, fill='green')
+            if k==1:
+                print("Hi")
+            else:
+                x = x - 15
+                y = y - 15
+                r = r - 45
+                t = t + 15
+                canvas.create_line((x, y), (r, t), (x - 15, y - 15), smooth=True, width=3, fill='green')
 
 
 canvas.bind("<Button-1>", callback)
 global counter
 counter=0
 
-def move_satilite(x_pos):
+def move_satilite(w,z):
     canvas.create_rectangle((0, 0), (800, 800), fill='#16316E')
     create_stars()
-    create_satelite(x_pos)
+    create_satelite(w,z)
     create_buttons()
     create_satelite_dish()
     radio_wave(counter)
 
 
-move_satilite(0)
+move_satilite(0,0)
 mainloop()
