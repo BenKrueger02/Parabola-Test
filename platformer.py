@@ -148,42 +148,43 @@ def radio_wave(counter):
     if counter == 2:
         x = 460
         y = 213
+        r = 440
         t = 220.5
-        r = 480
+
 
         canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width=3, fill='green')
         for k in range(0, 17):
             y = y + 15
-            r = r - 40
+            r = r + 40
             t = t + 15
             canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width=3, fill='green')
             if k==17:
                 print("Hi")
             else:
                 y = y + 15
-                r = r + 40
+                r = r - 40
                 t = t + 15
                 canvas.create_line((x, y), (r, t), (x, y + 15), smooth=True, width=3, fill='green')
 
         x = 460
         y = 738
-        t = 745.5
-        r = 437.5
+        r = 467.5
+        t = 715.5
 
         canvas.create_line((x, y), (r, t), (x - 15, y - 15), smooth=True, width=3, fill='green')
         for k in range(0, 2):
             x = x - 15
             y = y - 15
-            r = r + 15
-            t = t - 45
+            r = r - 45
+            t = t + 15
             canvas.create_line((x, y), (r, t), (x - 15, y - 15), smooth=True, width=3, fill='green')
             if k==1:
                 print("Hi")
             else:
                 x = x - 15
                 y = y - 15
-                r = r - 45
-                t = t + 15
+                r = r + 15
+                t = t - 45
                 canvas.create_line((x, y), (r, t), (x - 15, y - 15), smooth=True, width=3, fill='green')
 
 
