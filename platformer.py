@@ -30,6 +30,8 @@ def satellite_sim():
             y = random.randint(580, 801)
             canvas.create_oval((x,y),(x-6,y-6), fill = "white", outline = "White")
 
+        canvas.create_oval((100, 100), (94, 94), fill="yellow", outline="yellow")
+        canvas.create_oval((700, 100), (694, 94), fill="yellow", outline="yellow")
 
     def create_buttons():
         canvas.create_rectangle((630,670),(690,731),fill = '#00C5FF',outline='#16316E')
@@ -99,6 +101,11 @@ def satellite_sim():
                 print('Hello_2')
                 move_satilite(192,5)
 
+        if ((event.x <101 and event.x > 93) and (event.y <101 and event.y >93)):
+            draw()
+
+        if ((event.x <701 and event.x > 693) and (event.y <101 and event.y >93)):
+            flashcards_and_planner_2_in_1()
 
     def radio_wave(counter):
         if counter == 0:
@@ -220,11 +227,11 @@ def hangmn_game():
         master.destroy()
     def callmedium():
         global level
-        level=1
+        level=0
         master.destroy()
     def callhard():
         global level
-        level=2
+        level=0
         master.destroy()
     def callinstructions():
         print("The game is simple.\nGuess letters to try to guess the word the computer is thinking of.\nThere are 3 levels: easy, medium and hard.\n"
@@ -542,25 +549,12 @@ def hangmn_game():
     # define word lists
 
     def easy_words():
-        return ['GRFYN',
-                'CLGUBA',
-                'PBBY',
-                'TERRAJNL',
-                'QVABFNHE',
-                'ZNPVAGBFU',
-                'FHASYBJRE',
-                'ERBCRA',
-                'HANOYR',
-                'FUHQQRE',
-                'UBHEYL',
-                'LN',
-                'HCFPNYR',
-                'NZCHGRR',
-                'FGHSSL',
-                'TENZC',
-                'FYBO',
-                'YBFRE',
-                'TENFF']
+        return ['TERRAJNL',
+                'GRFYN',
+                'PBZCHGRE',
+                'VAGREARG',
+                'FNGRYYVGR',
+                'PBBBBBBY']
 
 
     def intermediate_words():
@@ -810,6 +804,630 @@ def hangmn_game():
 
     # execute initial round
     step(0, chosen_word, letters, max_attempts)
+
+def draw():
+    master = Tk()
+    import time
+    global color
+    color = 'blue'
+    global shape
+    shape = 'circle'
+
+    def callback(event):
+
+        if shape == 'rectangle':
+            rectangle = x.create_rectangle((event.x) - float(size_slider.get()) * .5,
+                                           (event.y) - float(size_slider.get()) * .5,
+                                           (event.x) + float(size_slider.get()) * .5,
+                                           (event.y) + float(size_slider.get()) * .5, outline=color)
+            x.itemconfigure(rectangle, fill=(color))
+
+        if shape == 'circle':
+            circle = x.create_oval((event.x) - float(size_slider.get()) * .5, (event.y) - float(size_slider.get()) * .5,
+                                   (event.x) + float(size_slider.get()) * .5, (event.y) + float(size_slider.get()) * .5,
+                                   outline=color)
+            x.itemconfigure(circle, fill=(color))
+
+        if shape == 'triangle':
+            triangle = x.create_polygon(event.x, event.y - float(size_slider.get()) * .625,
+                                        event.x - float(size_slider.get()) * .75,
+                                        event.y + float(size_slider.get()) * .625,
+                                        event.x + float(size_slider.get()) * .75,
+                                        event.y + float(size_slider.get()) * .625,
+                                        )
+            x.itemconfigure(triangle, fill=(color))
+
+    w = Canvas(master, width=600, height=600, )
+    w.pack()
+    x = Canvas(master, width=462, height=402, )
+    x.bind("<B1-Motion>", callback)
+    x.bind("<Button-1>", callback)
+    x.pack()
+    x.place(x=122, y=72)
+
+    def call_square():
+        global shape
+        print('The shape is a square!')
+        shape = 'rectangle'
+
+    def call_circle():
+        global shape
+        print('The shape is a circle!')
+        shape = 'circle'
+
+    def call_triangle():
+        global shape
+        print('The shape is a triangle!')
+        shape = 'triangle'
+
+    def call_pen():
+        global color
+        global shape
+        print('The pen is enabled!')
+        color = 'blue'
+        shape = 'circle'
+
+    def call_eraser():
+        global color
+        print('The eraser is enabled!')
+        color = 'white'
+
+    def call_clear():
+        x.delete("all")
+        print('Cleared!')
+
+    def call_smile():
+        print(':-)')
+        print('This is the tkinter GUI that Ben Krueger and Aidan MacDonnel made. It is based off an old mac GUI.')
+
+    def call_red():
+        global color
+        print('The color is red!')
+        color = 'red'
+
+    def call_orange():
+        global color
+        print('The color is orange!')
+        color = 'orange'
+
+    def call_yellow():
+        global color
+        print('The color is yellow!')
+        color = 'yellow'
+
+    def call_green():
+        global color
+        print('The color is green!')
+        color = 'green'
+
+    def call_blue():
+        global color
+        print('The color is blue!')
+        color = 'blue'
+
+    def call_purple():
+        global color
+        print('The color is purple!')
+        color = 'purple'
+
+    def call_done():
+        print('quitting...')
+        time.sleep(2)
+        master.destroy()
+
+    color_rectangle = w.create_rectangle(0, 350, 100, 590)
+    w.itemconfigure(color_rectangle, fill='white')
+
+    shape_rectangle = w.create_rectangle(120, 500, 590, 590)
+    w.itemconfigure(shape_rectangle, fill='white')
+
+    canvas_rectangle = w.create_rectangle(120, 70, 590, 480)
+    w.itemconfigure(canvas_rectangle, fill='white')
+
+    size_rectangle = w.create_rectangle(0, 70, 100, 330)
+    w.itemconfigure(size_rectangle, fill='white')
+
+    label = Label(master, text='SIZE', font=('Courier', 20, 'bold'))
+    label.pack()
+    label.place(x=20, y=80)
+
+    size_slider = Scale(master, from_=0, to=100, length=200, tickinterval=20)
+    size_slider.pack()
+    size_slider.place(x=0, y=120)
+
+    color_list = ['Red', 'Orange', 'Yellow', 'Green', 'Blue', 'Purple']
+
+    shape_list_top = [' Square ', '  Circle  ', 'Triangle']
+
+    shape_list_bottom = [' Pen  ', 'Eraser', ' Clear', ':-)']
+
+    call_back_lst_color = {'Red': call_red, 'Orange': call_orange, 'Yellow': call_yellow, 'Green': call_green,
+                           'Blue': call_blue, 'Purple': call_purple}
+
+    call_back_lst_shape_top = {' Square ': call_square, '  Circle  ': call_circle, 'Triangle': call_triangle}
+
+    call_back_lst_shape_bottom = {' Pen  ': call_pen, 'Eraser': call_eraser, ' Clear': call_clear, ':-)': call_smile}
+
+    def button_creator_color(color_list, callback):
+        height = 315
+        for i in color_list:
+            height = height + 40
+            color_button = Button(master, text=i, font=('Chelsea Market', 15, 'bold'), command=callback[i])
+            color_button.pack()
+            color_button.place(x=15, y=height)
+
+    def button_creator_shapes(shape_list, length, height, callback):
+        for i in shape_list:
+            length = length + 100
+            shape_button = Button(master, text=i, font=('Chelsea Market', 15, 'bold'), command=callback[i])
+            shape_button.pack()
+            shape_button.place(x=length, y=height)
+
+    done = Button(master, text='QUIT', font=('Courier', 20, 'bold'), command=call_done)
+    done.pack()
+    done.place(x=530, y=10)
+
+    button_creator_color(color_list, call_back_lst_color)
+    button_creator_shapes(shape_list_top, 50, 510, call_back_lst_shape_top)
+    button_creator_shapes(shape_list_bottom, 50, 550, call_back_lst_shape_bottom)
+
+def flashcards_and_planner_2_in_1():
+    master = Tk()
+
+    title_screen = Canvas(master, width=800, height=800, bg='#6960EC')
+    title_screen.pack()
+
+    global x
+    x = 0
+
+    global next_button
+    next_button = True
+
+    math = False
+    la = False
+    science = False
+    history = False
+    language = False
+    other = False
+
+    def Finished_command():
+        call_flashcards()
+        flash_title()
+        flash_sequence()
+
+    b = 0
+
+    def return_word(hello):
+        global word_input
+        global def_input
+        global definition
+        global Flash_num
+        global b
+        b = b + 1
+        if len(term_list) == 0:
+            flash_num_label_term = Label(master_flash_input, text='You have 1 flashcard', font=('Bodoni', 25, 'bold'),
+                                         fg='black', bg='white')
+            flash_num_label_term.pack()
+            flash_num_label_term.place(x=300, y=500)
+        else:
+            flash_num_label_term = Label(master_flash_input,
+                                         text='You have ' + (str(len(term_list) + 1)) + ' flashcards',
+                                         font=('Bodoni', 25, 'bold'), fg='black', bg='white')
+            flash_num_label_term.pack()
+            flash_num_label_term.place(x=300, y=500)
+        word_input = word.get()
+        def_input = definition.get()
+        word.delete(0, 'end')
+        definition.delete(0, 'end')
+        term_list.append(word_input)
+        definition_list.append(def_input)
+        print('hello')
+        print(term_list)
+        print(definition_list)
+        Flash_num = word_count
+
+    def OK_command():
+        global word_count
+        global term_list
+        global definition_list
+        global word_input
+        global word
+        global definition
+        global def_input
+
+        word_count = flash_num_slider.get()
+        print(word_count)
+        term_list = []
+        definition_list = []
+
+        for x in range(0, word_count):
+            word_input = ''
+            def_input = ''
+            word = Entry(master_flash_input)
+            word.pack()
+            word.place(x=325, y=300)
+
+            definition = Entry(master_flash_input)
+            definition.pack()
+            definition.place(x=325, y=400)
+            definition.bind('<Return>', return_word)
+
+            instruction_label_enter = Label(master_flash_input,
+                                            text="Enter the term, then the definiton, then click enter.\n Once you have entered all your flashcards\n click finished.",
+                                            font=('Bodoni', 25, 'bold'), fg='black', bg='white')
+            instruction_label_enter.pack()
+            instruction_label_enter.place(x=100, y=50)
+
+            instruction_label_term = Label(master_flash_input, text="Term:", font=('Bodoni', 25, 'bold'), fg='black',
+                                           bg='white')
+            instruction_label_term.pack()
+            instruction_label_term.place(x=250, y=295)
+
+            instruction_label_definition = Label(master_flash_input, text="Defintion:", font=('Bodoni', 25, 'bold'),
+                                                 fg='black', bg='white')
+            instruction_label_definition.pack()
+            instruction_label_definition.place(x=200, y=395)
+
+            OK_button.destroy()
+            flash_num_slider.destroy()
+            instruction_label.destroy()
+
+        Finished_button = Button(master_flash_input, text="Finished", font=('Bodoni', 25, 'bold'), fg='black',
+                                 bg='White', command=Finished_command)
+        Finished_button.pack()
+        Finished_button.place(x=350, y=750)
+
+    def create_flashcards():
+        global master_flash_input
+        global flashcard_input
+        global flash_num_slider
+        global OK_button
+        global instruction_label
+        master_flash_input = Tk()
+        flashcard_input = Canvas(master_flash_input, width=800, height=800, bg='white')
+        flashcard_input.pack()
+        instruction_label = Label(master_flash_input, text="Enter the amount of flashcards\n you wish to make!",
+                                  font=('Bodoni', 25, 'bold'), fg='black', bg='white')
+        instruction_label.pack()
+        instruction_label.place(x=250, y=50)
+        flash_num_slider = 0
+        flash_num_slider = Scale(master_flash_input, from_=0, to=50, length=360, tickinterval=10,
+                                 font=('Bodoni', 10, 'bold'), orient=HORIZONTAL)
+        flash_num_slider.pack()
+        flash_num_slider.place(x=250, y=150)
+        OK_button = Button(master_flash_input, text="OK", font=('Bodoni', 25, 'bold'), fg='black', bg='White',
+                           command=OK_command)
+        OK_button.pack()
+        OK_button.place(x=400, y=750)
+
+    def next_command():
+        global x
+        global next_button
+        next_button = True
+        x = x + 1
+        if x >= len(term_list):
+            print("Sorry, you ain't got no more flashcards.")
+            x = x - 1
+        else:
+            Word.destroy()
+            flash_title()
+            flash_sequence()
+
+    def flip_command():
+        global next_button
+        if next_button == True:
+            next_button = False
+            Word.destroy()
+            flash_title()
+            flash_sequence()
+        else:
+            next_button = True
+            Word.destroy()
+            flash_title()
+            flash_sequence()
+
+    def done_command():
+        global hour
+        global minute
+        global schedule_canvas
+        global master_4
+        master_4 = Tk()
+
+        hour = input('Enter the hour you want to start:')
+        if (0 >= hour) or (hour > 12) or (type(hour) != int):
+            print('Invalid input. Try again.')
+            done_command()
+        minute = input('Enter the minute you want to start as a two digit number:')
+        if (0 > minute) or (minute > 59) or (type(minute) != int):
+            print('Invalid input. Try again.')
+            done_command()
+        else:
+            if minute < 10:
+                print (str(hour) + ':0' + str(minute))
+            else:
+                print (str(hour) + ':' + str(minute))
+        schedule_canvas = Canvas(master_4, width=800, height=800, bg='white')
+        schedule_canvas.pack()
+        create_schedule()
+        create_planner(subjects_with_hw)
+        clock_time(time_for_subjects)
+
+    def flash_sequence():
+        flash_buttons()
+
+        if next_button == True:
+            global Word
+            Word = Label(flashcard_canvas, text=term_list[x], font=('Bodoni', 50, 'bold'), fg='black', bg='white')
+            Word.pack()
+            Word.place(x=210, y=400)
+            flash_buttons()
+        else:
+            Word = Label(flashcard_canvas, text=definition_list[x], font=('Bodoni', 50, 'bold'), fg='black', bg='white')
+            Word.pack()
+            Word.place(x=210, y=400)
+            flash_buttons()
+
+    next_true = False
+
+    def flash_buttons():
+        global master_2
+        next_button = Button(master_2, text="Next", font=('Bodoni', 25, 'bold'), fg='black', bg='White',
+                             command=next_command)
+        next_button.pack()
+        next_button.place(x=710, y=750)
+        flip_button = Button(master_2, text="Flip", font=('Bodoni', 25, 'bold'), fg='black', bg='White',
+                             command=flip_command)
+        flip_button.pack()
+        flip_button.place(x=10, y=750)
+
+    def call_flashcards():
+        global master_2
+        global flashcard_canvas
+        master_2 = Tk()
+        flashcard_canvas = Canvas(master_2, width=800, height=800, bg='white')
+        flashcard_canvas.pack()
+
+    def flash_title():
+        Title_flash = Label(master_2, text='Flash Time', font=('Bodoni', 50, 'bold'), fg='blue', bg='white')
+        Title_flash.pack()
+        Title_flash.place(x=275, y=100)
+
+    def planner_title():
+        Title_planner = Label(master_3, text='How much time will\n you spend on each subject?',
+                              font=('Bodoni', 35, 'bold'), fg='black', bg='white')
+        Title_planner.pack()
+        Title_planner.place(x=160, y=10)
+
+    def done_button():
+        done_button = Button(master_3, text="Done", font=('Bodoni', 25, 'bold'), fg='black', bg='White',
+                             command=done_command)
+        done_button.pack()
+        done_button.place(x=362.5, y=750)
+
+    def label_creator_subject(subject_list):
+        height = 0
+        global subject_label
+        for i in subject_list:
+            height = height + 110
+            subject_label = Label(master_3, text=i, font=('Bodoni', 25, 'bold'), fg='black', bg='white')
+            subject_label.pack()
+            subject_label.place(x=15, y=height)
+
+    def slider_creator_time():
+        height = 0
+        global slider_button_math
+        global slider_button_Language_arts
+        global slider_button_science
+        global slider_button_history
+        global slider_button_language
+        global slider_button_other
+
+        height = height + 110
+        slider_button_math = Scale(master_3, from_=0, to=110, length=360, tickinterval=10, font=('Bodoni', 10, 'bold'),
+                                   orient=HORIZONTAL)
+        slider_button_math.pack()
+        slider_button_math.place(x=425, y=height)
+
+        height = height + 110
+        slider_button_Language_arts = Scale(master_3, from_=0, to=110, length=360, tickinterval=10,
+                                            font=('Bodoni', 10, 'bold'), orient=HORIZONTAL)
+        slider_button_Language_arts.pack()
+        slider_button_Language_arts.place(x=425, y=height)
+
+        height = height + 110
+        slider_button_science = Scale(master_3, from_=0, to=110, length=360, tickinterval=10,
+                                      font=('Bodoni', 10, 'bold'), orient=HORIZONTAL)
+        slider_button_science.pack()
+        slider_button_science.place(x=425, y=height)
+
+        height = height + 110
+        slider_button_history = Scale(master_3, from_=0, to=110, length=360, tickinterval=10,
+                                      font=('Bodoni', 10, 'bold'), orient=HORIZONTAL)
+        slider_button_history.pack()
+        slider_button_history.place(x=425, y=height)
+
+        height = height + 110
+        slider_button_language = Scale(master_3, from_=0, to=110, length=360, tickinterval=10,
+                                       font=('Bodoni', 10, 'bold'), orient=HORIZONTAL)
+        slider_button_language.pack()
+        slider_button_language.place(x=425, y=height)
+
+        height = height + 110
+        slider_button_other = Scale(master_3, from_=0, to=110, length=360, tickinterval=10, font=('Bodoni', 10, 'bold'),
+                                    orient=HORIZONTAL)
+        slider_button_other.pack()
+        slider_button_other.place(x=425, y=height)
+
+    def create_schedule():
+        global subjects_with_hw
+        global time_for_subjects
+        subjects_with_hw = []
+        time_for_subjects = []
+        if slider_button_math.get() > 0:
+            print('You have ' + str(slider_button_math.get()) + ' minutes of Math.')
+            subjects_with_hw.append('Math')
+            time_for_subjects.append(slider_button_math.get())
+        if slider_button_Language_arts.get() > 0:
+            print('You have ' + str(slider_button_Language_arts.get()) + ' minutes of Language Arts.')
+            subjects_with_hw.append('Language Arts')
+            time_for_subjects.append(slider_button_Language_arts.get())
+        if slider_button_science.get() > 0:
+            print('You have ' + str(slider_button_science.get()) + ' minutes of Science.')
+            subjects_with_hw.append('Science')
+            time_for_subjects.append(slider_button_science.get())
+        if slider_button_history.get() > 0:
+            print('You have ' + str(slider_button_history.get()) + ' minutes of History.')
+            subjects_with_hw.append('History')
+            time_for_subjects.append(slider_button_history.get())
+        if slider_button_language.get() > 0:
+            print('You have ' + str(slider_button_language.get()) + ' minutes of Language.')
+            subjects_with_hw.append('Language')
+            time_for_subjects.append(slider_button_language.get())
+        if slider_button_other.get() > 0:
+            print('You have ' + str(slider_button_other.get()) + ' minutes of Somthing else.')
+            subjects_with_hw.append('Other')
+            time_for_subjects.append(slider_button_other.get())
+
+        print(subjects_with_hw)
+        print(time_for_subjects)
+
+    def clock_time(time_for_subjects):
+        global time
+        global time_label
+        global time_hour
+        global time_minute
+        global time_clock_label
+        global time_clock_label_1
+        global time_clock_label_2
+        global hour1
+        global minute1
+        global hour2
+        global minute2
+        global minute_string
+        global minute_string_two
+        global height
+        global minute_string_zero
+        height = 110
+        minute_string = ''
+        minute_string_two = ''
+        if minute < 10:
+            minute_string_zero = str('0' + str(minute))
+            time_clock_label = Label(master_4, text=('Start at: ' + str(hour) + ':' + str(minute_string_zero)),
+                                     font=('Bodoni', 25, 'bold'), fg='black', bg='white')
+            time_clock_label.pack()
+            time_clock_label.place(x=550, y=110)
+        else:
+            time_clock_label = Label(master_4, text=('Start at: ' + str(hour) + ':' + str(minute)),
+                                     font=('Bodoni', 25, 'bold'), fg='black', bg='white')
+            time_clock_label.pack()
+            time_clock_label.place(x=550, y=110)
+        time_hour = time_for_subjects[0] / 60
+        time_minute = time_for_subjects[0] % 60
+        hour1 = hour + time_hour
+        minute1 = minute + time_minute
+        if minute1 >= 60:
+            hour1 = hour1 + 1
+            minute1 = minute1 - 60
+        if minute1 < 10:
+            minute_string = str('0' + str(minute1))
+            time_clock_label = Label(master_4, text=('Start at: ' + str(hour1) + ':' + str(minute_string)),
+                                     font=('Bodoni', 25, 'bold'), fg='black', bg='white')
+            time_clock_label.pack()
+            time_clock_label.place(x=550, y=220)
+        else:
+            print(str(hour1) + ':' + str(minute1) + ' minute1')
+            time_clock_label = Label(master_4, text=('Start at: ' + str(hour1) + ':' + str(minute1)),
+                                     font=('Bodoni', 25, 'bold'), fg='black', bg='white')
+            time_clock_label.pack()
+            time_clock_label.place(x=550, y=220)
+
+        height = 330
+        for j in range(1, len(time_for_subjects) - 1):
+
+            hour2 = time_for_subjects[j] / 60
+            minute2 = time_for_subjects[j] % 60
+            print('Hour one is ' + str(hour1))
+            print('Hour two is ' + str(hour2))
+            hour2 = hour1 + hour2
+            minute2 = minute2 + minute1
+            if minute2 >= 60:
+                hour2 = hour2 + 1
+                minute2 = minute2 - 60
+            if minute2 < 10:
+                minute_string_two = ('0' + str(minute2))
+                print(str(hour2) + ':' + minute_string_two + ' minute string 2')
+                print(str(hour2) + ':' + str(minute2) + ' minute 2')
+                time_clock_label = Label(master_4, text=('Start at: ' + str(hour2) + ':' + str(minute_string_two)),
+                                         font=('Bodoni', 25, 'bold'), fg='black', bg='white')
+                time_clock_label.pack()
+                time_clock_label.place(x=550, y=height)
+            else:
+                print(str(hour2) + ':' + str(minute2) + ' minute 2')
+                time_clock_label = Label(master_4, text=('Start at: ' + str(hour2) + ':' + str(minute2)),
+                                         font=('Bodoni', 25, 'bold'), fg='black', bg='white')
+                time_clock_label.pack()
+                time_clock_label.place(x=550, y=height)
+                hour1 = hour2
+                minute1 = minute2
+                height = height + 110
+
+        height = 0
+        for i in range(0, len(time_for_subjects)):
+            height = height + 110
+            time = time_for_subjects[i]
+            time_label = Label(master_4, text=(str(time) + ' minutes'), font=('Bodoni', 25, 'bold'), fg='black',
+                               bg='white')
+            time_label.pack()
+            time_label.place(x=350, y=height)
+
+    def selection_screen():
+        global subject_list
+        global call_back_list
+        subject_list = ['Math', 'Language Arts', 'Science', 'History', 'Language', 'Other']
+        label_creator_subject(subject_list)
+        slider_creator_time()
+        planner_title()
+        done_button()
+
+    def create_planner(subjects_with_hw):
+        planner_label = Label(master_4, text='Schedule', font=('Bodoni', 60, 'bold'), fg='black', bg='white')
+        planner_label.pack()
+        planner_label.place(x=255, y=10)
+        height = 0
+        for x in subjects_with_hw:
+            height = height + 110
+            schedule_label = Label(master_4, text=x, font=('Bodoni', 25, 'bold'), fg='black', bg='white')
+            schedule_label.pack()
+            schedule_label.place(x=15, y=height)
+
+    def call_planner():
+        global master_3
+        global planner_canvas
+        global math_time
+        master_3 = Tk()
+        planner_canvas = Canvas(master_3, width=800, height=800, bg='white')
+        planner_canvas.pack()
+        selection_screen()
+
+    Title_main = Label(master, text='Homework Planner', font=('Bodoni', 60, 'bold'), fg='#5CB3FF', bg='#6960EC')
+    Title_main.pack()
+    Title_main.place(x=150, y=100)
+
+    flashcard_button = Button(master, text="Flashcards", font=('Bodoni', 25, 'bold'), fg='black', bg='#6960EC',
+                              command=create_flashcards)
+    flashcard_button.pack()
+    flashcard_button.place(x=320, y=300)
+
+    planner_button = Button(master, text="Planner", font=('Bodoni', 25, 'bold'), fg='black', bg='#6960EC',
+                            command=call_planner)
+    planner_button.pack()
+    planner_button.place(x=340, y=400)
+
+    Coders_label = Label(master, text='By: \n Ben Krueger and \n Aidan MacDonell', font=('Bodoni', 35, 'bold'),
+                         fg='#5CB3FF', bg='#6960EC')
+    Coders_label.pack()
+    Coders_label.place(x=250, y=500)
+
 
 hangmn_game()
 mainloop()
